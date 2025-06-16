@@ -7,10 +7,7 @@
 # option. This file may not be copied, modified, or distributed
 # except according to those terms.
 
-
 from typing import List, Literal, NotRequired, TypedDict
-
-import colorama
 
 
 class GithubAnnotation(TypedDict):
@@ -36,15 +33,6 @@ class LintingReportManager:
         }
         self.annotations: List[GithubAnnotation] = []
         self.total_count = 0
-        colorama.init()
-
-    def error_log(self, error):
-        print(
-            "\r  | "
-            + f"{colorama.Fore.BLUE}{error[0]}{colorama.Style.RESET_ALL}:"
-            + f"{colorama.Fore.YELLOW}{error[1]}{colorama.Style.RESET_ALL}: "
-            + f"{colorama.Fore.RED}{error[2]}{colorama.Style.RESET_ALL}"
-        )
 
     def clean_path(self, path):
         return path.removeprefix("./")
@@ -73,7 +61,7 @@ class LintingReportManager:
             line_end = line_start
 
         annotation: GithubAnnotation = {
-            "title": f"./mach {self.annotation_prefix}: {title}",
+            "title": f"{self.annotation_prefix}: {title}",
             "message": self.escape(message),
             "file_name": self.clean_path(file_name),
             "line_start": line_start,
