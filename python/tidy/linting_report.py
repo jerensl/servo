@@ -7,10 +7,12 @@
 # option. This file may not be copied, modified, or distributed
 # except according to those terms.
 
-from typing import List, Literal, NotRequired, TypedDict
+from dataclasses import dataclass
+from typing import Any, Literal, NotRequired
 
 
-class GithubAnnotation(TypedDict):
+@dataclass
+class GithubAnnotation:
     file_name: str
     line_start: int
     line_end: int
@@ -21,8 +23,8 @@ class GithubAnnotation(TypedDict):
     column_end: NotRequired[int]
 
 
-class LintingReportManager:
-    def __init__(self, annotation_prefix: str, limit: int):
+class GitHubAnnotationManager:
+    def __init__(self, annotation_prefix: str, limit: int = 10):
         self.annotation_prefix: str = annotation_prefix
         self.limit: int = limit
         self.severenty_map: dict[str, Literal["notice", "warning", "error"]] = {
@@ -31,25 +33,24 @@ class LintingReportManager:
             "warning": "warning",
             "error": "error",
         }
-        self.annotations: List[GithubAnnotation] = []
-        self.total_count = 0
+        self.total_count: int = 0
 
-    def clean_path(self, path):
+    def clean_path(self, path: str):
         return path.removeprefix("./")
 
-    def escape(self, s):
+    def escape(self, s: str):
         return s.replace("\r", "%0D").replace("\n", "%0A")
 
-    def append_annotation(
+    def emit_annotation(
         self,
-        title,
-        message,
-        file_name,
-        line_start,
-        line_end=None,
-        annotation_level=None,
-        column_start=None,
-        column_end=None,
+        title: str,
+        message: str,
+        file_name: str,
+        line_start: int,
+        line_end: int = None,
+        annotation_level: str = None,
+        column_start: int = None,
+        column_end: int = None,
     ):
         if self.total_count >= self.limit:
             return
@@ -73,10 +74,19 @@ class LintingReportManager:
             annotation["column_start"] = column_start
             annotation["column_end"] = column_end
 
-        self.annotations.append(annotation)
+        line_info = f"line={annotation['line_start']},endLine={annotation['line_end']},title={annotation['title']}"
+
+        column_info = ""
+        if "column_end" in annotation and "column_start" in annotation:
+            column_info = f"col={annotation['column_start']},endColumn={annotation['column_end']},"
+
+        print(
+            f"::{annotation['level']} file={annotation['file_name']},{column_info}{line_info}::{annotation['message']}"
+        )
+
         self.total_count += 1
 
-    def filter_clippy_log(self, data):
+    def emit_annotations_for_clippy(self, data: list[dict[str, Any]]):
         for item in data:
             if self.total_count >= self.limit:
                 break
@@ -94,7 +104,7 @@ class LintingReportManager:
             title = self.escape(message.get("message", ""))
             rendered_message = self.escape(message.get("rendered", ""))
 
-            self.append_annotation(
+            self.emit_annotation(
                 title,
                 rendered_message,
                 primary_span["file_name"],
@@ -104,23 +114,3 @@ class LintingReportManager:
                 primary_span["column_start"],
                 primary_span["column_end"],
             )
-
-    def emit_github_annotations(self):
-        for annotation in self.annotations:
-            self.emit_github_annotation(annotation)
-
-    def emit_github_annotation(self, annotation: GithubAnnotation):
-        line_info = f"line={annotation['line_start']},endLine={annotation['line_end']},title={annotation['title']}"
-
-        column_info = ""
-        if "column_end" in annotation and "column_start" in annotation:
-            column_info = f"col={annotation['column_start']},endColumn={annotation['column_end']},"
-
-        print(
-            (
-                f"::{annotation['level']} file={annotation['file_name']},"
-                f"{column_info}{line_info}"
-                f"::{annotation['message']}"
-            ),
-            flush=True,
-        )
