@@ -18,6 +18,7 @@ import re
 import subprocess
 import sys
 import concurrent.futures
+import multiprocessing
 from typing import Any, Dict, List
 
 import colorama
@@ -987,7 +988,7 @@ def collect_errors_for_files(files_to_check, checking_functions, line_checking_f
     if print_text:
         print("\r ➤  Checking files for tidiness...")
 
-    with concurrent.futures.ThreadPoolExecutor() as executor:
+    with concurrent.futures.ThreadPoolExecutor(max_workers=2) as executor:
         futures_to_errors = {
             executor.submit(collect_file_checking, filename, checking_functions, line_checking_functions): filename
             for filename in files_to_check
