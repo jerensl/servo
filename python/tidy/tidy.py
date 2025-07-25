@@ -848,7 +848,7 @@ def lint_wpt_test_files() -> Iterator[tuple[str, int, str]]:
         messages = []  # Clear any old messages.
 
         suite_directory = os.path.abspath(os.path.join(WPT_PATH, suite))
-        tests_changed = FileList(suite_directory, only_changed_files=True, progress=False)
+        tests_changed = FileList(suite_directory, only_changed_files=False, progress=False)
         tests_changed = [os.path.relpath(file, suite_directory) for file in tests_changed]
 
         if lint.lint(suite_directory, tests_changed, output_format="normal"):
