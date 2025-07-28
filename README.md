@@ -8,6 +8,8 @@ Servo welcomes contribution from everyone. Check out:
 
 - The [Servo Book](https://book.servo.org) for documentation
 
+- Test
+
 - [servo.org](https://servo.org/) for news and guides
 
 Coordination of Servo development happens:
