@@ -6,10 +6,13 @@ Servo is a prototype web browser engine written in the
 
 Servo welcomes contribution from everyone. Check out:
 
+# Test
+
 - The [Servo Book](https://book.servo.org) for documentation
 - [servo.org](https://servo.org/) for news and guides
 
 Coordination of Servo development happens:
+
 - Here in the Github Issues
 - On the [Servo Zulip](https://servo.zulipchat.com/)
 - In video calls advertised in the [Servo Project](https://github.com/servo/project/issues) repo.
@@ -26,7 +29,7 @@ For more detailed build instructions, see the Servo book under [Setting up your 
 ### macOS
 
 - Download and install [Xcode](https://developer.apple.com/xcode/) and [`brew`](https://brew.sh/).
-- Install `uv`: `curl -LsSf https://astral.sh/uv/install.sh | sh` 
+- Install `uv`: `curl -LsSf https://astral.sh/uv/install.sh | sh`
 - Install `rustup`: `curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh`
 - Restart your shell to make sure `cargo` is available
 - Install the other dependencies: `./mach bootstrap`
@@ -39,7 +42,7 @@ For more detailed build instructions, see the Servo book under [Setting up your 
   - Debian, Ubuntu: `sudo apt install curl`
   - Fedora: `sudo dnf install curl`
   - Gentoo: `sudo emerge net-misc/curl`
-- Install `uv`: `curl -LsSf https://astral.sh/uv/install.sh | sh` 
+- Install `uv`: `curl -LsSf https://astral.sh/uv/install.sh | sh`
 - Install `rustup`: `curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh`
 - Restart your shell to make sure `cargo` is available
 - Install the other dependencies: `./mach bootstrap`
@@ -48,7 +51,7 @@ For more detailed build instructions, see the Servo book under [Setting up your 
 ### Windows
 
 - Download [`uv`](https://docs.astral.sh/uv/getting-started/installation/#standalone-installer), [`choco`](https://chocolatey.org/install#individual), and [`rustup`](https://win.rustup.rs/)
-  - Be sure to select *Quick install via the Visual Studio Community installer*
+  - Be sure to select _Quick install via the Visual Studio Community installer_
 - In the Visual Studio Installer, ensure the following components are installed:
   - **Windows 10/11 SDK (anything >= 10.0.19041.0)** (`Microsoft.VisualStudio.Component.Windows{10, 11}SDK.{>=19041}`)
   - **MSVC v143 - VS 2022 C++ x64/x86 build tools (Latest)** (`Microsoft.VisualStudio.Component.VC.Tools.x86.x64`)
@@ -63,8 +66,8 @@ For more detailed build instructions, see the Servo book under [Setting up your 
 - Ensure that the following environment variables are set:
   - `ANDROID_SDK_ROOT`
   - `ANDROID_NDK_ROOT`: `$ANDROID_SDK_ROOT/ndk/26.2.11394342/`
- `ANDROID_SDK_ROOT` can be any directory (such as `~/android-sdk`).
-  All of the Android build dependencies will be installed there.
+    `ANDROID_SDK_ROOT` can be any directory (such as `~/android-sdk`).
+    All of the Android build dependencies will be installed there.
 - Install the latest version of the [Android command-line
   tools](https://developer.android.com/studio#command-tools) to
   `$ANDROID_SDK_ROOT/cmdline-tools/latest`.
