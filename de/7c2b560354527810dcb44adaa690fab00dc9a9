@@ -1,0 +1,21 @@
+components/script/dom/shadowroot/shadowroot.rs
+  s_07846a00828e2b::t_f5d5ab56f1adc3 255
+components/script/dom/document/document.rs
+  s_07846a00828e2b::t_2883616858e4c3 5289,5298
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.6",
+  "base_commit_sha": "de7c2b560354527810dcb44adaa690fab00dc9a9",
+  "prompts": {},
+  "sessions": {
+    "s_07846a00828e2b": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_e407523e4ffe0DcSAyouEO1K31",
+        "model": "beam-free"
+      },
+      "human_author": "Jerens Lensun <jerensslensun@gmail.com>"
+    }
+  }
+}
