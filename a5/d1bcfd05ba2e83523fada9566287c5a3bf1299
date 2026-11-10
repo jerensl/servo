@@ -1,0 +1,30 @@
+components/script/dom/document/document.rs
+  s_2083d030657914::t_f2af2e52558384 5286
+  s_07846a00828e2b::t_2883616858e4c3 5294
+components/script/dom/shadowroot/shadowroot.rs
+  s_07846a00828e2b::t_f5d5ab56f1adc3 254
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.6",
+  "base_commit_sha": "a5d1bcfd05ba2e83523fada9566287c5a3bf1299",
+  "prompts": {},
+  "sessions": {
+    "s_07846a00828e2b": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_e407523e4ffe0DcSAyouEO1K31",
+        "model": "beam-free"
+      },
+      "human_author": "Jerens Lensun <jerensslensun@gmail.com>"
+    },
+    "s_2083d030657914": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_e3b46eefaffedbM6qpb2oubZNh",
+        "model": "beam-free"
+      },
+      "human_author": null
+    }
+  }
+}
